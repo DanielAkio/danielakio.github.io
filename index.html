@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daniel Akio Teixeira</title>
+<meta name="description" content="Daniel Akio Teixeira — developer. Memo: sticky memories you pin on top of everything.">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-void: #08090a;
+    --color-carbon: #0f1011;
+    --color-graphite: #23252a;
+    --color-ash: #62666d;
+    --color-fog: #8a8f98;
+    --color-mist: #d0d6e0;
+    --color-paper: #ffffff;
+    --color-acid-lime: #e4f222;
+    --color-iris-violet: #6366f1;
+    --font-ui: 'Inter Variable', Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'Berkeley Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--color-void); color: var(--color-mist);
+    font: 400 16px/1.5 var(--font-ui);
+    font-feature-settings: "cv01", "ss03", "zero";
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 510; font-size: 16px; color: var(--color-paper); letter-spacing: -0.011em; }
+  .logo img { width: 24px; height: 24px; }
+  .nav-links { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+  .nav-links a { padding: 8px 12px; font-size: 13px; }
+  .nav-links a:hover { text-decoration: underline; }
+  .nav-links a.pill { background: var(--color-paper); color: var(--color-void); border-radius: 9999px; padding: 8px 16px; font-weight: 510; }
+  .nav-links a.pill { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; }
+  .nav-links a.pill:hover { text-decoration: none; }
+
+  .hero { padding: 96px 0; display: grid; gap: 24px; }
+  h1 {
+    margin: 0; color: var(--color-paper); font-weight: 510;
+    font-size: clamp(40px, 8vw, 64px); line-height: 1; letter-spacing: -0.022em; max-width: 14em;
+  }
+  .sub { margin: 0; color: var(--color-fog); max-width: 36em; }
+
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 8px; }
+  .btn-primary {
+    background: var(--color-paper); color: var(--color-void); border-radius: 9999px;
+    padding: 10px 16px; font-size: 14px; font-weight: 510; letter-spacing: -0.011em;
+  }
+  .link { color: var(--color-mist); font-size: 14px; }
+  .link:hover { text-decoration: underline; }
+
+  .project { padding-bottom: 96px; display: grid; gap: 24px; }
+  .label { font: 400 12px/1.4 var(--font-mono); color: var(--color-ash); letter-spacing: -0.013em; text-transform: uppercase; }
+  .card {
+    background: var(--color-carbon); border-radius: 12px; padding: 24px;
+    box-shadow: rgb(35, 37, 42) 0 0 0 1px inset;
+    display: grid; gap: 32px; grid-template-columns: 1fr 1.4fr; align-items: center;
+  }
+  .card-head { display: flex; align-items: center; gap: 16px; }
+  .card-head img { width: 56px; height: 56px; }
+  h2 { margin: 0; color: var(--color-paper); font-size: 32px; line-height: 1.13; font-weight: 400; letter-spacing: -0.022em; }
+  .card p { margin: 16px 0 24px; color: var(--color-fog); font-size: 15px; line-height: 1.6; letter-spacing: -0.011em; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .badge { background: rgba(255,255,255,0.05); color: var(--color-fog); border-radius: 4px; padding: 0 6px; font-size: 12px; line-height: 20px; }
+  .me { width: 96px; height: 96px; border-radius: 9999px; object-fit: cover; box-shadow: rgb(35, 37, 42) 0 0 0 1px; }
+  .role { margin: 0; color: var(--color-mist); font-size: 20px; line-height: 1.33; letter-spacing: -0.012em; max-width: 32em; }
+  .badge.tag { color: var(--color-iris-violet); }
+  .btn-ghost {
+    display: inline-block; border: 1px solid var(--color-graphite); color: var(--color-mist);
+    border-radius: 6px; padding: 8px 12px; font-size: 13px;
+  }
+  .btn-ghost:hover { border-color: var(--color-fog); }
+  .shot { width: 100%; border-radius: 6px; box-shadow: rgb(35, 37, 42) 0 0 0 1px; display: block; }
+
+
+  @media (max-width: 800px) {
+    .card { grid-template-columns: 1fr; }
+    .hero { padding: 64px 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a class="pill" href="https://www.linkedin.com/in/daniel-akioteixeira" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+      <a class="pill" href="https://github.com/DanielAkio" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <img class="me" src="assets/me.jpg" alt="Daniel Akio Teixeira">
+    <span class="label">São Paulo, Brazil</span>
+    <h1>Daniel Akio Teixeira</h1>
+    <p class="role">Software &amp; Data Engineer · Cloud Architecture (AWS &amp; GCP)</p>
+    <p class="sub">I'm passionate about building long-lasting systems: simple, easy to maintain and reliable in production. I design cloud architectures with a focus on observability, performance and quality, bridging software and data engineering. I follow AI closely and love teaching and learning alongside my team.</p>
+  </header>
+
+  <section class="project" id="projects">
+    <span class="label">Featured project</span>
+    <div class="card">
+      <div>
+        <div class="card-head">
+          <img src="assets/icon.svg" alt="Memo icon">
+          <h2>Memo</h2>
+        </div>
+        <p>Sticky memories you pin on top of everything. A minimal desktop notes app that keeps what matters in view while you work.</p>
+        <div class="badges">
+          <span class="badge tag">Desktop app</span>
+          <span class="badge">JavaScript</span>
+          <span class="badge">Tauri</span>
+        </div>
+        <a class="btn-ghost" href="https://github.com/DanielAkio/memo">Source on GitHub</a>
+      </div>
+      <img class="shot" src="assets/memo-preview.gif" alt="Memo app preview">
+    </div>
+  </section>
+</div>
+
+</body>
+</html>

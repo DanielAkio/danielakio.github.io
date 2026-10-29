@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Memo app icon: a minimal pushpin (head, wide base, needle) tilted 45°,
+       centred on a transparent canvas. Drawn in a 100-unit box, scaled to 1024. -->
+  <g transform="translate(512 512) scale(11.3) translate(-52.4 -47.6) rotate(45 50 50)">
+    <!-- needle -->
+    <path d="M50 64V96" stroke="#8a8f98" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <!-- head -->
+    <rect x="35" y="8" width="30" height="50" rx="9" fill="#6366f1"/>
+    <!-- base -->
+    <rect x="18" y="52" width="64" height="16" rx="8" fill="#6366f1"/>
+  </g>
+</svg>
