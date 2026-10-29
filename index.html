@@ -105,13 +105,11 @@
   .card-head img { width: 56px; height: 56px; }
   h2 { margin: 0; color: var(--color-paper); font-size: 32px; line-height: 1.13; font-weight: 400; letter-spacing: -0.022em; }
   .card p { margin: 16px 0 24px; color: var(--color-fog); font-size: 15px; line-height: 1.6; letter-spacing: -0.011em; }
-  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-  .badge { background: var(--tint); color: var(--color-fog); border-radius: 4px; padding: 0 6px; font-size: 12px; line-height: 20px; }
   .me { width: 96px; height: 96px; border-radius: 9999px; object-fit: cover; box-shadow: var(--color-graphite) 0 0 0 1px; }
   .role { margin: 0; color: var(--color-mist); font-size: 20px; line-height: 1.33; letter-spacing: -0.012em; max-width: 32em; }
-  .badge.tag { color: var(--color-iris-violet); }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
   .btn-ghost {
-    display: inline-block; border: 1px solid var(--color-graphite); color: var(--color-mist);
+    display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--color-graphite); color: var(--color-mist);
     border-radius: 6px; padding: 8px 12px; font-size: 13px;
   }
   .btn-ghost:hover { border-color: var(--color-fog); }
@@ -153,12 +151,10 @@
           <h2>Memo</h2>
         </div>
         <p data-i18n="memo_desc">Sticky memories you pin on top of everything. A minimal desktop notes app that keeps what matters in view while you work.</p>
-        <div class="badges">
-          <span class="badge tag" data-i18n="memo_tag">Desktop app</span>
-          <span class="badge">JavaScript</span>
-          <span class="badge">Tauri</span>
+        <div class="btn-row">
+          <a class="btn-ghost" href="https://github.com/DanielAkio/memo" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg><span data-i18n="memo_src">Source code</span></a>
+          <a class="btn-ghost" id="memo-site" href="https://danielakio.github.io/memo/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span data-i18n="memo_site">Website</span></a>
         </div>
-        <a class="btn-ghost" href="https://github.com/DanielAkio/memo" target="_blank" rel="noopener noreferrer" data-i18n="memo_src">Source on GitHub</a>
       </div>
       <img class="shot" id="shot" alt="Memo app preview" data-i18n-alt="memo_alt">
       <noscript><img class="shot" src="assets/memo-preview-dark-en.gif" alt="Memo app preview"></noscript>
@@ -178,8 +174,8 @@
       about: "I'm passionate about building long-lasting systems: simple, easy to maintain and reliable in production. I design cloud architectures with a focus on observability, performance and quality, bridging software and data engineering. I follow AI closely and love teaching and learning alongside my team.",
       featured: "Featured project",
       memo_desc: "Sticky memories you pin on top of everything. A minimal desktop notes app that keeps what matters in view while you work.",
-      memo_tag: "Desktop app",
-      memo_src: "Source on GitHub",
+      memo_src: "Source code",
+      memo_site: "Website",
       memo_alt: "Memo app preview",
       switch_lang: "Português",
       dark: "Dark theme",
@@ -194,8 +190,8 @@
       about: "Sou apaixonado por construir sistemas duradouros: simples, fáceis de manter e confiáveis em produção. Projeto arquiteturas em nuvem com foco em observabilidade, desempenho e qualidade, unindo engenharia de software e de dados. Acompanho a IA de perto e adoro ensinar e aprender junto com meu time.",
       featured: "Projeto em destaque",
       memo_desc: "Memórias adesivas que você fixa sobre tudo. Um app de notas minimalista para desktop que mantém o que importa à vista enquanto você trabalha.",
-      memo_tag: "App desktop",
-      memo_src: "Código no GitHub",
+      memo_src: "Código-fonte",
+      memo_site: "Site",
       memo_alt: "Prévia do app Memo",
       switch_lang: "English",
       dark: "Tema escuro",
@@ -239,6 +235,8 @@
     document.querySelector('meta[name="description"]').setAttribute("content", dict.meta);
     document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = dict[el.getAttribute("data-i18n")]; });
     document.querySelectorAll("[data-i18n-alt]").forEach(function (el) { el.alt = dict[el.getAttribute("data-i18n-alt")]; });
+
+    document.getElementById("memo-site").href = "https://danielakio.github.io/memo/" + (lang === "pt" ? "pt/" : "");
 
     var other = lang === "pt" ? "en" : "pt";
     langBtn.textContent = other.toUpperCase();
