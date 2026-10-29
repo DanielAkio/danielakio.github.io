@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <style>
   :root {
     --color-void: #08090a;
@@ -22,6 +23,36 @@
     --color-iris-violet: #6366f1;
     --font-ui: 'Inter Variable', Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --font-mono: 'Berkeley Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --tint: rgba(255,255,255,0.05);
+    color-scheme: dark;
+  }
+  /* Light theme: same roles, inverted values (void = page canvas, paper = headings, etc.).
+     Follows the system unless the visitor picked a theme (data-theme on <html>). */
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --color-void: #ffffff;
+      --color-carbon: #fafafa;
+      --color-graphite: #e4e4e7;
+      --color-ash: #8a8f98;
+      --color-fog: #62666d;
+      --color-mist: #3b3e44;
+      --color-paper: #08090a;
+      --color-iris-violet: #4f46e5;
+      --tint: rgba(0,0,0,0.05);
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --color-void: #ffffff;
+    --color-carbon: #fafafa;
+    --color-graphite: #e4e4e7;
+    --color-ash: #8a8f98;
+    --color-fog: #62666d;
+    --color-mist: #3b3e44;
+    --color-paper: #08090a;
+    --color-iris-violet: #4f46e5;
+    --tint: rgba(0,0,0,0.05);
+    color-scheme: light;
   }
   * { box-sizing: border-box; }
   body {
@@ -41,6 +72,12 @@
   .nav-links a.pill { background: var(--color-paper); color: var(--color-void); border-radius: 9999px; padding: 8px 16px; font-weight: 510; }
   .nav-links a.pill { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; }
   .nav-links a.pill:hover { text-decoration: none; }
+  .nav-links button.pill {
+    display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0;
+    border: 1px solid var(--color-graphite); border-radius: 9999px; background: transparent; color: var(--color-mist);
+    font: 510 12px/1 var(--font-ui); cursor: pointer;
+  }
+  .nav-links button.pill:hover { border-color: var(--color-fog); }
 
   .hero { padding: 96px 0; display: grid; gap: 24px; }
   h1 {
@@ -61,7 +98,7 @@
   .label { font: 400 12px/1.4 var(--font-mono); color: var(--color-ash); letter-spacing: -0.013em; text-transform: uppercase; }
   .card {
     background: var(--color-carbon); border-radius: 12px; padding: 24px;
-    box-shadow: rgb(35, 37, 42) 0 0 0 1px inset;
+    box-shadow: var(--color-graphite) 0 0 0 1px inset;
     display: grid; gap: 32px; grid-template-columns: 1fr 1.4fr; align-items: center;
   }
   .card-head { display: flex; align-items: center; gap: 16px; }
@@ -69,8 +106,8 @@
   h2 { margin: 0; color: var(--color-paper); font-size: 32px; line-height: 1.13; font-weight: 400; letter-spacing: -0.022em; }
   .card p { margin: 16px 0 24px; color: var(--color-fog); font-size: 15px; line-height: 1.6; letter-spacing: -0.011em; }
   .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-  .badge { background: rgba(255,255,255,0.05); color: var(--color-fog); border-radius: 4px; padding: 0 6px; font-size: 12px; line-height: 20px; }
-  .me { width: 96px; height: 96px; border-radius: 9999px; object-fit: cover; box-shadow: rgb(35, 37, 42) 0 0 0 1px; }
+  .badge { background: var(--tint); color: var(--color-fog); border-radius: 4px; padding: 0 6px; font-size: 12px; line-height: 20px; }
+  .me { width: 96px; height: 96px; border-radius: 9999px; object-fit: cover; box-shadow: var(--color-graphite) 0 0 0 1px; }
   .role { margin: 0; color: var(--color-mist); font-size: 20px; line-height: 1.33; letter-spacing: -0.012em; max-width: 32em; }
   .badge.tag { color: var(--color-iris-violet); }
   .btn-ghost {
@@ -78,7 +115,7 @@
     border-radius: 6px; padding: 8px 12px; font-size: 13px;
   }
   .btn-ghost:hover { border-color: var(--color-fog); }
-  .shot { width: 100%; border-radius: 6px; box-shadow: rgb(35, 37, 42) 0 0 0 1px; display: block; }
+  .shot { width: 100%; border-radius: 6px; box-shadow: var(--color-graphite) 0 0 0 1px; display: block; }
 
 
   @media (max-width: 800px) {
@@ -91,7 +128,9 @@
 <div class="wrap">
   <nav>
     <div class="nav-links">
-      <a href="#projects">Projects</a>
+      <a href="#projects" data-i18n="nav_projects">Projects</a>
+      <button class="pill" id="lang-btn" type="button"></button>
+      <button class="pill" id="theme-btn" type="button"></button>
       <a class="pill" href="https://www.linkedin.com/in/daniel-akio-teixeira/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
       <a class="pill" href="https://github.com/DanielAkio" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
     </div>
@@ -99,32 +138,137 @@
 
   <header class="hero">
     <img class="me" src="assets/me.jpg" alt="Daniel Akio Teixeira">
-    <span class="label">São Paulo, Brazil</span>
+    <span class="label" data-i18n="location">São Paulo, Brazil</span>
     <h1>Daniel Akio Teixeira</h1>
-    <p class="role">Software &amp; Data Engineer · Cloud Architecture (AWS &amp; GCP)</p>
-    <p class="sub">I'm passionate about building long-lasting systems: simple, easy to maintain and reliable in production. I design cloud architectures with a focus on observability, performance and quality, bridging software and data engineering. I follow AI closely and love teaching and learning alongside my team.</p>
+    <p class="role" data-i18n="role">Software &amp; Data Engineer · Cloud Architecture (AWS &amp; GCP)</p>
+    <p class="sub" data-i18n="about">I'm passionate about building long-lasting systems: simple, easy to maintain and reliable in production. I design cloud architectures with a focus on observability, performance and quality, bridging software and data engineering. I follow AI closely and love teaching and learning alongside my team.</p>
   </header>
 
   <section class="project" id="projects">
-    <span class="label">Featured project</span>
+    <span class="label" data-i18n="featured">Featured project</span>
     <div class="card">
       <div>
         <div class="card-head">
           <img src="assets/icon.svg" alt="Memo icon">
           <h2>Memo</h2>
         </div>
-        <p>Sticky memories you pin on top of everything. A minimal desktop notes app that keeps what matters in view while you work.</p>
+        <p data-i18n="memo_desc">Sticky memories you pin on top of everything. A minimal desktop notes app that keeps what matters in view while you work.</p>
         <div class="badges">
-          <span class="badge tag">Desktop app</span>
+          <span class="badge tag" data-i18n="memo_tag">Desktop app</span>
           <span class="badge">JavaScript</span>
           <span class="badge">Tauri</span>
         </div>
-        <a class="btn-ghost" href="https://github.com/DanielAkio/memo" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+        <a class="btn-ghost" href="https://github.com/DanielAkio/memo" target="_blank" rel="noopener noreferrer" data-i18n="memo_src">Source on GitHub</a>
       </div>
-      <img class="shot" src="assets/memo-preview.gif" alt="Memo app preview">
+      <img class="shot" id="shot" alt="Memo app preview" data-i18n-alt="memo_alt">
+      <noscript><img class="shot" src="assets/memo-preview-dark-en.gif" alt="Memo app preview"></noscript>
     </div>
   </section>
 </div>
 
+<script>
+(function () {
+  var T = {
+    en: {
+      title: "Daniel Akio Teixeira",
+      meta: "Daniel Akio Teixeira — developer. Memo: sticky memories you pin on top of everything.",
+      nav_projects: "Projects",
+      location: "São Paulo, Brazil",
+      role: "Software & Data Engineer · Cloud Architecture (AWS & GCP)",
+      about: "I'm passionate about building long-lasting systems: simple, easy to maintain and reliable in production. I design cloud architectures with a focus on observability, performance and quality, bridging software and data engineering. I follow AI closely and love teaching and learning alongside my team.",
+      featured: "Featured project",
+      memo_desc: "Sticky memories you pin on top of everything. A minimal desktop notes app that keeps what matters in view while you work.",
+      memo_tag: "Desktop app",
+      memo_src: "Source on GitHub",
+      memo_alt: "Memo app preview",
+      switch_lang: "Português",
+      dark: "Dark theme",
+      light: "Light theme"
+    },
+    pt: {
+      title: "Daniel Akio Teixeira",
+      meta: "Daniel Akio Teixeira — desenvolvedor. Memo: memórias adesivas que você fixa sobre tudo.",
+      nav_projects: "Projetos",
+      location: "São Paulo, Brasil",
+      role: "Engenheiro de Software e de Dados · Arquitetura Cloud (AWS e GCP)",
+      about: "Sou apaixonado por construir sistemas duradouros: simples, fáceis de manter e confiáveis em produção. Projeto arquiteturas em nuvem com foco em observabilidade, desempenho e qualidade, unindo engenharia de software e de dados. Acompanho a IA de perto e adoro ensinar e aprender junto com meu time.",
+      featured: "Projeto em destaque",
+      memo_desc: "Memórias adesivas que você fixa sobre tudo. Um app de notas minimalista para desktop que mantém o que importa à vista enquanto você trabalha.",
+      memo_tag: "App desktop",
+      memo_src: "Código no GitHub",
+      memo_alt: "Prévia do app Memo",
+      switch_lang: "English",
+      dark: "Tema escuro",
+      light: "Tema claro"
+    }
+  };
+  var root = document.documentElement;
+  var shot = document.getElementById("shot");
+  var langBtn = document.getElementById("lang-btn");
+  var themeBtn = document.getElementById("theme-btn");
+  var mq = window.matchMedia("(prefers-color-scheme: light)");
+  var SUN = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var MOON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+
+  function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  function detectLang() {
+    var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "en"];
+    for (var i = 0; i < langs.length; i++) {
+      var l = String(langs[i]).toLowerCase();
+      if (l.indexOf("pt") === 0) return "pt";
+      if (l.indexOf("en") === 0) return "en";
+    }
+    return "en";
+  }
+
+  var lang = get("lang") === "pt" || get("lang") === "en" ? get("lang") : detectLang();
+  var savedTheme = get("theme");
+  if (savedTheme === "light" || savedTheme === "dark") root.setAttribute("data-theme", savedTheme);
+
+  function isLight() {
+    var t = root.getAttribute("data-theme");
+    return t ? t === "light" : mq.matches;
+  }
+
+  function render() {
+    var dict = T[lang];
+    root.lang = lang === "pt" ? "pt-BR" : "en";
+    document.title = dict.title;
+    document.querySelector('meta[name="description"]').setAttribute("content", dict.meta);
+    document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = dict[el.getAttribute("data-i18n")]; });
+    document.querySelectorAll("[data-i18n-alt]").forEach(function (el) { el.alt = dict[el.getAttribute("data-i18n-alt")]; });
+
+    var other = lang === "pt" ? "en" : "pt";
+    langBtn.textContent = other.toUpperCase();
+    langBtn.setAttribute("aria-label", dict.switch_lang);
+    langBtn.title = dict.switch_lang;
+
+    var light = isLight();
+    themeBtn.innerHTML = light ? MOON : SUN;
+    themeBtn.setAttribute("aria-label", light ? dict.dark : dict.light);
+    themeBtn.title = light ? dict.dark : dict.light;
+
+    var src = "assets/memo-preview-" + (light ? "light" : "dark") + "-" + lang + ".gif";
+    if (shot.getAttribute("src") !== src) shot.src = src;
+  }
+
+  langBtn.addEventListener("click", function () {
+    lang = lang === "pt" ? "en" : "pt";
+    set("lang", lang);
+    render();
+  });
+  themeBtn.addEventListener("click", function () {
+    var next = isLight() ? "dark" : "light";
+    root.setAttribute("data-theme", next);
+    set("theme", next);
+    render();
+  });
+  if (mq.addEventListener) mq.addEventListener("change", render); else if (mq.addListener) mq.addListener(render);
+
+  render();
+})();
+</script>
 </body>
 </html>
